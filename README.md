@@ -5,7 +5,7 @@ ios 开源bilibili客户端的
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 * [BlocksKit](https://github.com/zwaldowski/BlocksKit)
 * [Masonry](https://github.com/jdg/MBProgressHUD)
-* [MBProgressHUD](MBProgressHUD)
+* [MBProgressHUD](https://github.com/jdg/MBProgressHUD)
 * [MJExtension](https://github.com/CoderMJLee/MJExtension)
 * [MJRefresh](https://github.com/CoderMJLee/MJRefresh)
 * [SDWebImage](https://github.com/rs/SDWebImage)
