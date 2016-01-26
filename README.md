@@ -1,6 +1,6 @@
 # JHBiliBili
 ## 简介
-ios 开源bilibili客户端的
+ios 开源bilibili客户端
 ## 第三方库
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 * [BlocksKit](https://github.com/zwaldowski/BlocksKit)
@@ -10,6 +10,11 @@ ios 开源bilibili客户端的
 * [MJRefresh](https://github.com/CoderMJLee/MJRefresh)
 * [SDWebImage](https://github.com/rs/SDWebImage)
 * [BarrageRenderer](https://github.com/unash/BarrageRenderer)
+* [iCarousel](https://github.com/nicklockwood/iCarousel)
+* [WMPageController](https://github.com/wangmchn/WMPageController)
+
+##bulid
+在 BiliBili/Define/Constants.h中找到APPKEY和APPSEC 换成自己的 目前b站已经停止appkey的发放 请自行谷歌找个能用的
 
 ##长这样
 ![预览图](https://github.com/sunsx9316/JHBiliBili/blob/master/image/1.png)

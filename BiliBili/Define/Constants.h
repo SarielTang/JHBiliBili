@@ -57,12 +57,12 @@ cell.preservesSuperviewLayoutMargins = NO; \
 /**
  *  appkey
  */
-#define APPKEY @"85eb6835b0a1034e"
+#define APPKEY @""
 
 /**
  *  appsec
  */
-#define APPSEC @"2ad42749773c441109bdc0191257a664"
+#define APPSEC @""
 
 /**
  *  默认网络错误信息
