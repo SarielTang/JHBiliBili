@@ -19,3 +19,6 @@ ios 开源bilibili客户端
 ![预览图](https://github.com/sunsx9316/JHBiliBili/blob/master/image/1.png)
 
 ´_ゝ` 没错 确实很像15年的android版 因为就是照着那样子做的
+
+## 许可证
+软件遵循MIT协议 详情请见LICENSE文件
