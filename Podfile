@@ -7,7 +7,6 @@ source 'https://gitcafe.com/akuandev/Specs.git'
 target 'BiliBili' do
 
 pod 'AFNetworking', '~> 2.6.3'
-pod 'BlocksKit'
 pod 'Masonry'
 pod 'MBProgressHUD'
 pod 'MJExtension'

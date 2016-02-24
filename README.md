@@ -3,7 +3,6 @@
 ios 开源bilibili客户端
 ## 第三方库
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
-* [BlocksKit](https://github.com/zwaldowski/BlocksKit)
 * [Masonry](https://github.com/jdg/MBProgressHUD)
 * [MBProgressHUD](https://github.com/jdg/MBProgressHUD)
 * [MJExtension](https://github.com/CoderMJLee/MJExtension)
@@ -14,7 +13,7 @@ ios 开源bilibili客户端
 * [WMPageController](https://github.com/wangmchn/WMPageController)
 
 ##bulid
-在 BiliBili/Define/Constants.h中找到APPKEY和APPSEC 换成自己的 目前b站已经停止appkey的发放 请自行谷歌找个能用的
+在 BiliBili/Config/Constants.h中找到APPKEY和APPSEC 换成自己的 目前b站已经停止appkey的发放 请自行谷歌找个能用的
 
 ##长这样
 ![预览图](https://github.com/sunsx9316/JHBiliBili/blob/master/image/1.png)

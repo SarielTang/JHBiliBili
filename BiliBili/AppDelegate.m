@@ -11,7 +11,6 @@
 #import "RecommendViewController.h"
 #import "ShinBanViewController.h"
 #import "FindViewController.h"
-#import "UIViewController+Tools.h"
 #import "WMPageController.h"
 #import "SearchView.h"
 @interface AppDelegate ()
@@ -95,7 +94,7 @@
 
 - (UINavigationController *)nav{
     if (_nav == nil) {
-        _nav = [self.vc setupNavigationController];
+        _nav = [[UINavigationController alloc] initWithRootViewController:self.vc];
         self.searchView.hidden = YES;
     }
     return _nav;
