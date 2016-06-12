@@ -13,11 +13,18 @@
 @end
 
 @implementation BaseViewController
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self addObserver:self forKeyPath:@"cm.themeStyle" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self colorSetting];
-    [self addObserver:self forKeyPath:@"cm.themeStyle" options:NSKeyValueObservingOptionNew context:nil];
+    
 }
 
 - (ColorManager *)cm{
