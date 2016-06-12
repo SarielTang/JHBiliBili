@@ -88,8 +88,11 @@
     NSDictionary* dic = self.vm.dicMap[indexPath.section];
     NSString* key = [dic allValues].firstObject;
     AVInfoViewController* vc = [[AVInfoViewController alloc] init];
-    [vc setWithModel:[self.vm AVDataModelForRow: indexPath.row - 1 section:key] section: key];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.row - 1 >= 0) {
+        [vc setWithModel:[self.vm AVDataModelForRow: indexPath.row - 1 section:key] section: key];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 #pragma mark - icarouse
