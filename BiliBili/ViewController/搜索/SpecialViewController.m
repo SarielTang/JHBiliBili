@@ -42,7 +42,7 @@
  *  初始化属性
  */
 - (void)setUpProperty{
-    [self.coverImgView setImageWithURL: [self.vm specialCover]];
+    [self.coverImgView yy_setImageWithURL:[self.vm specialCover] options:YY_WEB_IMAGE_OPTION];
     self.titleLabel.text = [self.vm specialTitle];
     self.browseLabel.text = [self.vm specialBrowse];
     self.favoriteLabel.text = [self.vm specialFaverite];

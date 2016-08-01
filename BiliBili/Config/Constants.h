@@ -17,6 +17,9 @@
 #define kWindowH   [UIScreen mainScreen].bounds.size.height //应用程序的屏幕高度
 #define kWindowW    [UIScreen mainScreen].bounds.size.width  //应用程序的屏幕宽度
 
+//图片的默认加载方式
+#define YY_WEB_IMAGE_OPTION YYWebImageOptionProgressiveBlur | YYWebImageOptionSetImageWithFadeAnimation
+
 
 //移除iOS7之后，cell默认左侧的分割线边距
 #define kRemoveCellSeparator \

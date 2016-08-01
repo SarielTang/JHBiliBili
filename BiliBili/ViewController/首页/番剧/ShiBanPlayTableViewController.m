@@ -21,7 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview: self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -132,7 +134,7 @@
 
 - (UITableView *)tableView {
 	if(_tableView == nil) {
-		_tableView = [[UITableView alloc] initWithFrame: self.view.frame style: UITableViewStyleGrouped];
+		_tableView = [[UITableView alloc] initWithFrame: CGRectZero style: UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
@@ -143,6 +145,7 @@
                 [_tableView reloadData];
             }];
         }];
+        [self.view addSubview: _tableView];
 	}
 	return _tableView;
 }

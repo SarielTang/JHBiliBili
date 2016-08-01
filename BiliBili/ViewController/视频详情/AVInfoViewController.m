@@ -105,7 +105,7 @@
         self.publicTimeLabel.text = [NSString stringWithFormat:@"发布于：%@", pubTime];
     }
     //图片URL
-    [self.imgView setImageWithURL: [self.vm infoImgURL]];
+    [self.imgView yy_setImageWithURL:[self.vm infoImgURL] options:YY_WEB_IMAGE_OPTION];
     //标题
     self.titleLabel.text = [self.vm infoTitle];
     

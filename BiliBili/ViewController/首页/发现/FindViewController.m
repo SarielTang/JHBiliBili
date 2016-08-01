@@ -61,8 +61,8 @@
         [self.vm refreshDataCompleteHandle:^(NSError *error) {
             [self.tableView.mj_header endRefreshing];
             
-            [self.hotSearchLeftButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:0]];
-            [self.hotSearchRightButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:1]];
+            [self.hotSearchLeftButton yy_setBackgroundImageWithURL:[self.vm rankCoverForNum:0] forState:UIControlStateNormal options:YY_WEB_IMAGE_OPTION];
+            [self.hotSearchRightButton yy_setBackgroundImageWithURL:[self.vm rankCoverForNum:1] forState:UIControlStateNormal options:YY_WEB_IMAGE_OPTION];
             [self.hotSearchLeftButton setNeedsDisplay];
             [self.hotSearchRightButton setNeedsDisplay];
             self.hotSearchLeftButton.label.text = [self.vm coverKeyWordForNum:0];
@@ -189,7 +189,8 @@
 - (HotSearchButton *)hotSearchLeftButton {
 	if(_hotSearchLeftButton == nil) {
 		_hotSearchLeftButton = [[HotSearchButton alloc] initWithKeyWord:[self.vm coverKeyWordForNum:0]];
-        [_hotSearchLeftButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:0]];
+        [_hotSearchLeftButton yy_setBackgroundImageWithURL:[self.vm rankCoverForNum:0] forState:UIControlStateNormal options:YY_WEB_IMAGE_OPTION];
+        
         [_hotSearchLeftButton addTarget: self action:@selector(searchButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         [self.tableView.tableHeaderView addSubview: _hotSearchLeftButton];
         [_hotSearchLeftButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -205,7 +206,7 @@
 - (HotSearchButton *)hotSearchRightButton {
 	if(_hotSearchRightButton == nil) {
 		_hotSearchRightButton = [[HotSearchButton alloc] initWithKeyWord:[self.vm coverKeyWordForNum:1]];
-         [_hotSearchRightButton setBackgroundImageForState:UIControlStateNormal withURL:[self.vm rankCoverForNum:1]];
+        [_hotSearchRightButton yy_setBackgroundImageWithURL:[self.vm rankCoverForNum:1] forState:UIControlStateNormal options:YY_WEB_IMAGE_OPTION];
         [_hotSearchRightButton addTarget: self action:@selector(searchButtonDown:) forControlEvents:UIControlEventTouchUpInside];
         [self.tableView.tableHeaderView addSubview: _hotSearchRightButton];
         [_hotSearchRightButton mas_makeConstraints:^(MASConstraintMaker *make) {

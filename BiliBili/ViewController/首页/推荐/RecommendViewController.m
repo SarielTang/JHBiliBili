@@ -76,7 +76,7 @@
         RecommendContentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"RecommendContentCollectionViewCell" forIndexPath:indexPath];
         //-1因为第一个cell是分区头
         cell.titleLabel.text = [self.vm titleForRow:indexPath.row - 1 section:dic[key]];
-        [cell.imgv setImageWithURL: [self.vm picForRow:indexPath.row - 1 section:dic[key]]];
+        [cell.imgv yy_setImageWithURL:[self.vm picForRow:indexPath.row - 1 section:dic[key]] options:YY_WEB_IMAGE_OPTION];
         cell.playLabel.text = [self.vm playForRow:indexPath.row - 1 section:dic[key]];
         cell.danMuLabel.text = [self.vm danMuCountForRow:indexPath.row - 1 section:dic[key]];
         [cell setUpProperty];
@@ -104,7 +104,7 @@
     if (view == nil) {
         view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowW / 2)];
     }
-    [view setImageWithURL:[self.vm headImgURL:index]];
+    [view yy_setImageWithURL:[self.vm headImgURL:index] options:YY_WEB_IMAGE_OPTION];
     return view;
 }
 //滚动视图跳转

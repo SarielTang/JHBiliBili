@@ -10,8 +10,8 @@
 
 @implementation ShiBanRecommentCollectionViewCell
 - (void)setUpProperty{
-    self.Label.backgroundColor = [[ColorManager shareColorManager] colorWithString: @"lightBackGroundColor"];
-    self.Label.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
+    self.titleLabel.backgroundColor = [[ColorManager shareColorManager] colorWithString: @"lightBackGroundColor"];
+    self.titleLabel.textColor = [[ColorManager shareColorManager] colorWithString:@"textColor"];
 }
 
 - (UIImageView *)imgView {
@@ -20,25 +20,25 @@
         [self.contentView addSubview: _imgView];
         [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(0);
-            make.bottom.mas_equalTo(self.Label.mas_top);
+            make.bottom.mas_equalTo(self.titleLabel.mas_top);
         }];
     }
     return _imgView;
 }
 
-- (UILabel *)Label {
-    if(_Label == nil) {
-        _Label = [[UILabel alloc] init];
-        _Label.textAlignment = NSTextAlignmentCenter;
-        _Label.font = [UIFont systemFontOfSize: 11];
-        _Label.numberOfLines = 2;
-        [self.contentView addSubview: _Label];
-        [_Label mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UILabel *)titleLabel {
+    if(_titleLabel == nil) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.font = [UIFont systemFontOfSize: 11];
+        _titleLabel.numberOfLines = 2;
+        [self.contentView addSubview: _titleLabel];
+        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.left.right.mas_equalTo(0);
             make.height.mas_equalTo(29);
         }];
     }
-    return _Label;
+    return _titleLabel;
 }
 
 @end

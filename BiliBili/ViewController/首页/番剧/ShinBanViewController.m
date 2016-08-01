@@ -10,97 +10,94 @@
 #import "ShiBanPlayTableViewController.h"
 #import "ShiBanInfoViewController.h"
 
-#import "ShiBanTitleCollectionViewCell.h"
-#import "ShiBanRecommentCollectionViewCell.h"
-#import "ShiBanIndexCollectionViewCell.h"
+#import "ShiBanHeadHeaderFooterView.h"
+#import "ShiBanHeadTableViewCell.h"
+#import "ShiBanRecommedShiBanTableViewCell.h"
 
 #import "ShinBanViewModel.h"
 
-#define kColNum 3
-#define kEdge 10
-
-@interface ShinBanViewController ()<UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ShinBanViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) ShinBanViewModel* vm;
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIButton *everyDayPlay;
 @property (strong, nonatomic) UIButton *shinBanIndex;
+@property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
 @end
 
 @implementation ShinBanViewController
 #pragma mark - 方法
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview: self.collectionView];
-    [self.collectionView.mj_header beginRefreshing];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)colorSetting{
-    self.collectionView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
-    [self.collectionView reloadData];
+    self.tableView.backgroundColor = [[ColorManager shareColorManager] colorWithString:@"backgroundColor"];
+    [self.tableView reloadData];
 }
 
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
 
-#pragma mark - UICollectionViewDelegateFlowLayout
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    //cell的宽度等于(屏宽-2*边距-(列数-1)*item间的间距)/列数
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.width / 4);
-    }else if(indexPath.section == 1){
-        return CGSizeMake(self.collectionView.frame.size.width, 25);
-    }else{
-        CGFloat inset = [self collectionView:collectionView layout:collectionViewLayout minimumInteritemSpacingForSectionAtIndex: 2];
-        CGFloat width = (kWindowW - 2 * kEdge - (kColNum - 1) * inset) / kColNum;
+        ShiBanHeadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShiBanHeadTableViewCell" forIndexPath:indexPath];
+        [cell changeTheme];
         
-        return CGSizeMake(width, width / 0.7 + 30);
+        @weakify(self)
+        [cell setTouchButtonCallBack:^(NSUInteger tag) {
+            @strongify(self)
+            if (!self) return;
+            
+            if (tag == 100) {
+                ShiBanPlayTableViewController *vc = [[ShiBanPlayTableViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        self.cellHeightDic[indexPath] = @80.0f;
+        return cell;
     }
-}
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
-    return section == 2?UIEdgeInsetsMake(kEdge, kEdge, kEdge, kEdge):UIEdgeInsetsMake(0, 0, 0, 0);
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return section == 2?5:0;
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return section == 2?10:0;
-}
-
-
-#pragma mark - UICollectionViewDataSource
-
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return section == 2?self.vm.recommentList.count:1;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    //0 新番索引 1 分区头 2内容
-    return 3;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:@"ShiBanIndexCollectionViewCell" forIndexPath:indexPath];
-    }else if(indexPath.section == 1){
-        ShiBanTitleCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ShiBanTitleCollectionViewCell" forIndexPath: indexPath];
-        [cell setUpProperty];
-        return cell;
-    }else{
-        ShiBanRecommentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"ShiBanRecommentCollectionViewCell" forIndexPath: indexPath];
-        [cell.imgView setImageWithURL: [self.vm commendCoverForRow: indexPath.row]];
-        cell.Label.text = [self.vm commendTitileForRow: indexPath.row];
-        [cell setUpProperty];
-        return cell;
-    }
-}
-
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 2) {
+    ShiBanRecommedShiBanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShiBanRecommedShiBanTableViewCell" forIndexPath:indexPath];
+    [cell changeTheme];
+    self.cellHeightDic[indexPath] = @([cell cellHeightWithModels:self.vm.recommentList]);
+    @weakify(self)
+    [cell setTouchItemCallBack:^(RecommentShinBanDataModel *model) {
+        @strongify(self)
         ShiBanInfoViewController* avc = [[ShiBanInfoViewController alloc] init];
-        [avc setWithModel:self.vm.recommentList[indexPath.row]];
+        [avc setWithModel:model];
         [self.navigationController pushViewController:avc animated:YES];
+    }];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.cellHeightDic[indexPath] floatValue];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        ShiBanHeadHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"ShiBanHeadHeaderFooterView"];
+        view.iconImageView.image = [UIImage imageNamed:@"ic_category_promo"];
+        view.titleLabel.text = @"推荐番剧";
+        [view changeTheme];
+        return view;
     }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return section == 0 ? 0.1 : 40;
 }
 
 #pragma mark - 懒加载
@@ -111,30 +108,45 @@
     return _vm;
 }
 
-- (UICollectionView *)collectionView {
-	if(_collectionView == nil) {
-		_collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout: [[UICollectionViewFlowLayout alloc] init]];
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        
-        [_collectionView registerClass:[ShiBanTitleCollectionViewCell class] forCellWithReuseIdentifier: @"ShiBanTitleCollectionViewCell"];
-        [_collectionView registerClass:[ShiBanRecommentCollectionViewCell class] forCellWithReuseIdentifier: @"ShiBanRecommentCollectionViewCell"];
-        [_collectionView registerClass:[ShiBanIndexCollectionViewCell class] forCellWithReuseIdentifier: @"ShiBanIndexCollectionViewCell"];
-        
-        _collectionView.mj_header = [MyRefreshComplete myRefreshHead:^{
-            [self.vm refreshDataCompleteHandle:^(NSError *error) {
-                [_collectionView.mj_header endRefreshing];
-                [_collectionView reloadData];
-            }];
-        }];
-        _collectionView.mj_footer = [MyRefreshComplete myRefreshFoot:^{
-            [self.vm getMoreDataCompleteHandle:^(NSError *error) {
-                [_collectionView.mj_footer endRefreshing];
-                [_collectionView reloadData];
-            }];
-        }];
+- (NSMutableDictionary *)cellHeightDic {
+	if(_cellHeightDic == nil) {
+		_cellHeightDic = [[NSMutableDictionary alloc] init];
 	}
-	return _collectionView;
+	return _cellHeightDic;
+}
+
+- (UITableView *)tableView {
+	if(_tableView == nil) {
+		_tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[ShiBanHeadTableViewCell class] forCellReuseIdentifier:@"ShiBanHeadTableViewCell"];
+        [_tableView registerClass:[ShiBanRecommedShiBanTableViewCell class] forCellReuseIdentifier:@"ShiBanRecommedShiBanTableViewCell"];
+        [_tableView registerClass:[ShiBanHeadHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"ShiBanHeadHeaderFooterView"];
+        _tableView.sectionFooterHeight = 0.1;
+        @weakify(self)
+        _tableView.mj_header = [MyRefreshComplete myRefreshHead:^{
+            @strongify(self)
+            [self.vm refreshDataCompleteHandle:^(NSError *error) {
+                if (!self) return;
+                
+                [self.tableView.mj_header endRefreshing];
+                [self.tableView reloadData];
+            }];
+        }];
+        _tableView.mj_footer = [MyRefreshComplete myRefreshFoot:^{
+            @strongify(self)
+            [self.vm getMoreDataCompleteHandle:^(NSError *error) {
+                if (!self) return;
+                
+                [self.tableView.mj_footer endRefreshing];
+                [self.tableView reloadData];
+            }];
+        }];
+        [self.view addSubview:_tableView];
+	}
+	return _tableView;
 }
 
 @end

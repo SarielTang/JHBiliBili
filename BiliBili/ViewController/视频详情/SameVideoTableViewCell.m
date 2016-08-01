@@ -20,12 +20,12 @@
 @implementation SameVideoTableViewCell
 
 - (void)setWithDic:(NSDictionary *)dic{
-    __weak typeof(self)weakSelf = self;
     [dic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([key isEqualToString:@"videoImgView"]) {
-            [weakSelf.videoImgView setImageWithURL:obj];
-        }else{
-            [weakSelf setValue:obj forKeyPath:key];
+            [self.videoImgView yy_setImageWithURL:obj options:YY_WEB_IMAGE_OPTION];
+        }
+        else{
+            [self setValue:obj forKeyPath:key];
         }
     }];
 }

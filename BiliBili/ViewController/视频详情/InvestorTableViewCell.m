@@ -18,12 +18,11 @@
 
 
 - (void)setWithDic:(NSDictionary *)dic{
-    __weak typeof(self)weakSelf = self;
     [dic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([key isEqualToString:@"invertorIcon"]) {
-            [weakSelf.invertorIcon setImageWithURL: obj];
+            [self.invertorIcon yy_setImageWithURL:obj options:YY_WEB_IMAGE_OPTION];
         }else{
-            [weakSelf setValue:obj forKeyPath:key];
+            [self setValue:obj forKeyPath:key];
         }
     }];
 }

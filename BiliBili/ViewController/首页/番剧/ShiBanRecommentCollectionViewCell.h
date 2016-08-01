@@ -10,6 +10,6 @@
 
 @interface ShiBanRecommentCollectionViewCell : UICollectionViewCell
 @property (strong, nonatomic) UIImageView *imgView;
-@property (strong, nonatomic) UILabel *Label;
+@property (strong, nonatomic) UILabel *titleLabel;
 - (void)setUpProperty;
 @end

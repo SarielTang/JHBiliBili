@@ -34,7 +34,7 @@
 - (void)setWithDic:(NSDictionary*)dic{
     [dic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([key isEqualToString: @"coverImageView"]) {
-            [self.coverImageView setImageWithURL: obj];
+            [self.coverImageView yy_setImageWithURL:obj options:YY_WEB_IMAGE_OPTION];
         }else{
             [self setValue:obj forKeyPath:key];
         }

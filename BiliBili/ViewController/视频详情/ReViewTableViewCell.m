@@ -21,14 +21,15 @@
 @implementation ReViewTableViewCell
 
 - (void)setWithDic:(NSDictionary *)dic{
-    __weak typeof(self)weakSelf = self;
     [dic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([key isEqualToString:@"imgView"]) {
-            [weakSelf.imgView setImageWithURL: obj];
-        }else if ([key isEqualToString:@"genderImgView"]){
-            [weakSelf.genderImgView setImage:[UIImage imageNamed: [NSString stringWithFormat:@"ic_user_%@",@{@"男":@"male",@"女":@"female",@"保密":@"sox"}[obj]]]];
-        }else{
-            [weakSelf setValue:obj forKeyPath:key];
+            [self.imgView yy_setImageWithURL:obj options:YY_WEB_IMAGE_OPTION];
+        }
+        else if ([key isEqualToString:@"genderImgView"]){
+            [self.genderImgView setImage:[UIImage imageNamed: [NSString stringWithFormat:@"ic_user_%@",@{@"男":@"male",@"女":@"female",@"保密":@"sox"}[obj]]]];
+        }
+        else{
+            [self setValue:obj forKeyPath:key];
         }
     }];
 }

@@ -2,7 +2,7 @@
 # platform :ios, '8.0'
 # Uncomment this line if you're using Swift
 # use_frameworks!
-source 'https://gitcafe.com/akuandev/Specs.git'
+#source 'https://gitcafe.com/akuandev/Specs.git'
 
 target 'BiliBili' do
 
@@ -11,6 +11,7 @@ pod 'Masonry'
 pod 'MBProgressHUD'
 pod 'MJExtension'
 pod 'MJRefresh'
-pod 'SDWebImage'
+pod 'YYWebImage'
+pod 'YYCategories'
 end
 

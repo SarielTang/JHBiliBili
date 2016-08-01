@@ -54,7 +54,7 @@
 }
 
 - (void)setProperty{
-    [self.shiBanCoverImgView setImageWithURL: [self.vm shiBanCover]];
+    [self.shiBanCoverImgView yy_setImageWithURL:[self.vm shiBanCover] options:YY_WEB_IMAGE_OPTION];
     self.shiBanLabel.text = [self.vm shiBanTitle];
     self.shiBanPlayLabel.text = [self.vm shinBanInfoPlayNum];
     self.shiBanDanMuLabel.text = [self.vm shinBanInfodanMuNum];

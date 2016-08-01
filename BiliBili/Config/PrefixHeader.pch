@@ -29,7 +29,9 @@
 #import "Constants.h"
 
 #import <AFNetworking.h>
-#import <UIKit+AFNetworking.h>
+#import <YYWebImage.h>
+#import <YYCategories.h>
+//#import <UIKit+AFNetworking.h>
 
 #import <MJRefresh.h>
 #import <MJExtension.h>
@@ -50,6 +52,7 @@
 #import "BaseViewController.h"
 
 #import "UserDefaultDownLoadManager.h"
+
 
 
 #endif /* PrefixHeader_pch */
